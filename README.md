@@ -1,8 +1,9 @@
 # A--Star
  
-In this project we create the A* algorithm and we visualize it using pygame.
+At this project we implement the A* algorithm and we use the pygame library to visualize the whole project!
 
 
-<p align="center">
-  <img width="460" height="500" src="https://github.com/TheodoreGisis/A--Star--Algorithm/blob/main/Visualize/%CE%91.jpg" >
-</p>
+
+
+
+
