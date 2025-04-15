@@ -29,7 +29,7 @@ def list_git_folders():
 
 def rename_folder():
     old_folder_name = "Visualize"
-    new_folder_name = "test"
+    new_folder_name = "test1"
 
     try:
         naming_command = subprocess.run(['git' , 'mv' , old_folder_name , new_folder_name])
@@ -38,10 +38,16 @@ def rename_folder():
     except subprocess.CalledProcessError as e:
         print(f"Error running git mv command: {e}")
 
+def git_add():
+    naming_command = subprocess.run(['git' , 'add' , '.' ])
+    
+
 
 def commit_message(message):
     commiting_result = subprocess.run(['git' , 'commit' , '-m', message])
 
 
 if __name__ == "__main__":
+    list_git_folders()
     rename_folder()
+    git_add()
