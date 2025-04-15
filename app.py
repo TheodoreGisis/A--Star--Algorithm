@@ -46,8 +46,11 @@ def git_add():
 def commit_message(message):
     commiting_result = subprocess.run(['git' , 'commit' , '-m', message])
 
+def push():
+    commiting_result = subprocess.run(['git' , 'push' , 'origin'])
 
 if __name__ == "__main__":
     list_git_folders()
-    rename_folder()
-    git_add()
+    # rename_folder()
+    # git_add()
+    push()
