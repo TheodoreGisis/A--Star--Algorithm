@@ -90,7 +90,7 @@ class RenameGitFolder:
 # Example Usage
 if __name__ == "__main__":
     r = RenameGitFolder("visual", "visualww")
-    r.ListFoldersOnThisRepository()  # List the folders
+    r.ListFoldersOnThisRepository()  # List the folde2rs
     r.RenameOldFolder()               # Rename the specified main folder
     r.GitAdd()                        # Stage the changes
     r.GitCommited("Renamed visual to visualww")  # Commit the changes
