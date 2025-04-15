@@ -71,7 +71,7 @@ class RenameGitFolder():
 
 
 if __name__ == "__main__":
-    r = RenameGitFolder("test","visualww")
+    r = RenameGitFolder("visual","visualww")
     r.ListFoldersOnThisRepository()
     r.RenameOldFolder()
     r.GitAdd()
