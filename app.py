@@ -97,4 +97,4 @@ if __name__ == "__main__":
     r.Push()                          # Push to remote
 
     # If you want to rename a subfolder as well:
-    r.RenameSubfolder("visualww", "old_subfolder", "new_subfolder")
+    r.RenameSubfolder("visualww", "subfolder", "new_subfolder")
