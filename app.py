@@ -29,7 +29,7 @@ def list_git_folders():
 
 def rename_folder():
     old_folder_name = "Visualize"
-    new_folder_name = "test1"
+    new_folder_name = "test122"
 
     try:
         naming_command = subprocess.run(['git' , 'mv' , old_folder_name , new_folder_name])
