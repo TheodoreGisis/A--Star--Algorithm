@@ -1,56 +1,78 @@
 import subprocess
+from time import sleep
 
-def list_git_folders():
-    try:
-        result = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'HEAD'], capture_output=True, text=True, check=True)       
+class RenameGitFolder():
+
+    def __init__(self,OldFolderName,NewFolderName):
         
-        files = result.stdout.splitlines()
-        folders = set()
+        self.OldFolderName = OldFolderName
+        self.NewFolderName = NewFolderName
+        self.folders       = set()
 
-        for file in files:
-            folder = '/'.join(file.split('/')[:-1])  
-            if folder:  
-                folders.add(folder)
+    def ListFoldersOnThisRepository(self):
+        try:
+            result = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'HEAD'], capture_output=True, text=True, check=True)       
+            
+            files = result.stdout.splitlines()
 
-        if folders:
-            print("Git folders:")
-            for folder in sorted(folders):
-                print(f"- {folder}")
-        else:
-            print("No folders found in the Git repository.")
+            for file in files:
+                folder = '/'.join(file.split('/')[:-1])  
+                if folder:  
+                    self.folders.add(folder)
 
-        return folders
+            if self.folders:
+                print("Git folders:")
+                for folder in sorted(self.folders):
+                    print(f"- {folder}")
+            else:
+                print("No folders found in the Git repository.")
 
-    except subprocess.CalledProcessError as e:
-        print(f"Error running git ls-tree: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+            return self.folders
 
+        except subprocess.CalledProcessError as e:
+            print(f"Error running git ls-tree: {e}")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+       
+    def RenameOldFolder(self):
+        try:
+            print("Renaming Folder......")
+            Git_Naming_Command = subprocess.run(['git' , 'mv' , self.OldFolderName , self.NewFolderName])
+            print("Folder Renamed......")
+        except subprocess.CalledProcessError as e:
+            print(f"Error running git mv command: {e}")
 
-def rename_folder():
-    old_folder_name = "Visualize"
-    new_folder_name = "test122"
+    def GitAdd(self):
+        try:
+            print("Git Add......")
+            Git_Add_Command = subprocess.run(['git' , 'add' , '.' ])
 
-    try:
-        naming_command = subprocess.run(['git' , 'mv' , old_folder_name , new_folder_name])
-        commit_message("Change folder name")
+            print("Git Add Completed......")
+        except subprocess.CalledProcessError as e:
+            print(f"Error running git Add command: {e}")
 
-    except subprocess.CalledProcessError as e:
-        print(f"Error running git mv command: {e}")
+    def GitCommited(self,message):
+        try:
+            print("Git Commit......")
+            Git_Commit_Command = subprocess.run(['git' , 'commit' , '-m', message])
 
-def git_add():
-    naming_command = subprocess.run(['git' , 'add' , '.' ])
-    
+            print("Git Commit Completed......")
+        except subprocess.CalledProcessError as e:
+            print(f"Error running Commit command: {e}")
 
+    def Push(self):
+        try:
+            print("Git Push......")
+            Git_Commit_Command = subprocess.run(['git' , 'push' , 'origin'])
+ 
+            print("Git Push Completed......")
+        except subprocess.CalledProcessError as e:
+            print(f"Error running Push command: {e}")
 
-def commit_message(message):
-    commiting_result = subprocess.run(['git' , 'commit' , '-m', message])
-
-def push():
-    commiting_result = subprocess.run(['git' , 'push' , 'origin'])
 
 if __name__ == "__main__":
-    list_git_folders()
-    # rename_folder()
-    # git_add()
-    push()
+    r = RenameGitFolder("test","visual")
+    r.ListFoldersOnThisRepository()
+    r.RenameOldFolder()
+    r.GitAdd()
+    r.GitCommited("test")
